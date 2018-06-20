@@ -3,7 +3,7 @@ import { Icon, Header } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 const HeaderComp = () => (
-  <div>
+  <div className="App-header">
     <Header as="h3" floated="left">
       <Link to="/">A Big Ol'Blog</Link>
     </Header>

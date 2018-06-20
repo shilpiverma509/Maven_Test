@@ -1,25 +1,25 @@
 import React from "react";
-import { Field, reduxForm, submit } from "redux-form";
-import { Button, Input, Form, Label } from "semantic-ui-react";
+import { Field, reduxForm } from "redux-form";
+import { Button, Input, Form } from "semantic-ui-react";
 import { connect } from "react-redux";
-import { createPost, fetchPost, fetchPosts } from "../actions/index";
+import { createPost } from "../actions/index";
 import axios from "axios";
 import UserProfileData from "./UserProfileData";
 
-class PostsNew extends React.Component {
+class NewUserForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       submit: false
     };
   }
-  renderFields({ input, label, meta: { error, touched } }) {
+  renderFields({ input, type, label, meta: { error, touched } }) {
     return (
       <Form.Field>
         <label>{label}</label>
-        <Input
+        <input
           style={{ marginBottom: "5px" }}
-          type="text"
+          type={type}
           {...input}
           placeholder={label}
         />
@@ -30,13 +30,13 @@ class PostsNew extends React.Component {
     );
   }
   onSubmit(values) {
-    const req = axios
+    axios
       .post("https://jsonplaceholder.typicode.com/posts", values)
       .then(res => this.props.createPost(res));
+
     this.setState({
       submit: true
     });
-    //document.getElementById("userForm").style.display = "none";
   }
 
   render() {
@@ -50,15 +50,27 @@ class PostsNew extends React.Component {
           <Field
             label="Username"
             name="username"
+            type="text"
             component={this.renderFields}
           />
-          <Field label="Email" name="email" component={this.renderFields} />
+          <Field
+            label="Email"
+            type="email"
+            name="email"
+            component={this.renderFields}
+          />
           <Field
             label="Password"
+            type="password"
             name="password"
             component={this.renderFields}
           />
-          <Field label="Mobile" name="mobile" component={this.renderFields} />
+          <Field
+            label="Mobile"
+            name="mobile"
+            type="number"
+            component={this.renderFields}
+          />
           <Button primary type="submit">
             Submit
           </Button>
@@ -113,6 +125,6 @@ export default reduxForm({
   connect(
     mapStateToProps,
     { createPost }
-  )(PostsNew)
+  )(NewUserForm)
 );
 //        <UserProfileData id="userData" user={this.props.user} />

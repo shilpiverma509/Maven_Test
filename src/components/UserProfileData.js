@@ -1,24 +1,16 @@
 import React from "react";
-import { connect } from "react-redux";
-import { fetchPost } from "../actions";
-import { Icon, Card, Container, Segment } from "semantic-ui-react";
+import { Icon, Container } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import HeaderComp from "./HeaderComp";
 
 class UserProfileData extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { user } = this.props;
     if (!user) {
-      return <div />;
+      return <div>...loading</div>;
     }
     return (
-      <Container>
-        <Segment raised>
-          <HeaderComp />
+      <Container style={{ clear: "both" }}>
+        <div>
           <h3>{user.username}</h3>
           <h4>
             <Icon name="mail" />
@@ -28,8 +20,9 @@ class UserProfileData extends React.Component {
             <Icon name="phone" />
             {user.mobile}
           </h4>
-        </Segment>
-        <Link to="/"> Back</Link>
+
+          <Link to="/"> Back</Link>
+        </div>
       </Container>
     );
   }

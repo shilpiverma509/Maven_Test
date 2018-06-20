@@ -3,8 +3,7 @@ import "../App.css";
 import { connect } from "react-redux";
 import { fetchPosts } from "../actions";
 import _ from "lodash";
-import { Link } from "react-router-dom";
-import { GridColumn, Grid, Segment } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
 
 class Blog extends React.Component {
   componentDidMount() {
@@ -26,23 +25,21 @@ class Blog extends React.Component {
       "grey",
       "black"
     ];
-    return _.map(this.props.posts, post => {
+    let grid = _.map(this.props.posts, (post, index) => {
+      let i = parseInt(index);
+      let itemColor = colors[i % 13];
+
       return (
-        <Grid columns={3} divided>
-          {colors.map(color => (
-            <Grid.Row>
-              <Grid.Column color={color} key={color} className="grid-colors" />
-              <Grid.Column>
-                <li className="ui segment" key={post.id}>
-                  <h3>{post.title}</h3>
-                  <p>{post.body}</p>
-                </li>
-              </Grid.Column>
-            </Grid.Row>
-          ))}
-        </Grid>
+        <Grid.Column className="grid-colors" key={index}>
+          <div style={{ backgroundColor: itemColor }} className="colorBox" />
+          <div>
+            <h3 className="truncate">{post.title}</h3>
+            <p className="truncate">{post.body}</p>
+          </div>
+        </Grid.Column>
       );
     });
+    return <Grid columns={3}> {grid} </Grid>;
   }
 
   render() {
