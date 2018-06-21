@@ -97,13 +97,9 @@ function validate(values) {
   if (!values.password) {
     errors.password = required;
   } else if (values.password.length < 8 || values.password.length > 16) {
-    errors.password = "password should be between 8 to 16 charachters";
+    errors.password = "password should be between 8 to 16 characters";
   } else if (/[\W_]/.test(values.password)) {
     errors.password = "Only letters and numbers allowed";
-  } else if (
-    !(values.password.search(/(a-z)+/) && values.password.search(/(0-9)+/))
-  ) {
-    errors.password = "The password must contain atleast one number";
   }
   if (!values.mobile) {
     errors.mobile = required;

@@ -9,8 +9,8 @@ class UserProfileData extends React.Component {
       return <div>...Loading</div>;
     }
     return (
-      <Container style={{ clear: "both" }}>
-        <div>
+      <Container>
+        <div style={{ clear: "both" }}>
           <h3>{user.username}</h3>
           <h4>
             <Icon name="mail" />
