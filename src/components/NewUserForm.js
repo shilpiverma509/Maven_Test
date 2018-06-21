@@ -1,6 +1,6 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-import { Button, Input, Form } from "semantic-ui-react";
+import { Button, Form } from "semantic-ui-react";
 import { connect } from "react-redux";
 import { createPost } from "../actions/index";
 import axios from "axios";
@@ -33,7 +33,6 @@ class NewUserForm extends React.Component {
     axios
       .post("https://jsonplaceholder.typicode.com/posts", values)
       .then(res => this.props.createPost(res));
-
     this.setState({
       submit: true
     });
@@ -97,6 +96,8 @@ function validate(values) {
   }
   if (!values.password) {
     errors.password = required;
+  } else if (values.password.length < 8 || values.password.length > 16) {
+    errors.password = "password should be between 8 to 16 charachters";
   } else if (/[\W_]/.test(values.password)) {
     errors.password = "Only letters and numbers allowed";
   } else if (

@@ -6,7 +6,7 @@ class UserProfileData extends React.Component {
   render() {
     const { user } = this.props;
     if (!user) {
-      return <div>...loading</div>;
+      return <div>...Loading</div>;
     }
     return (
       <Container style={{ clear: "both" }}>
